@@ -52,6 +52,7 @@ previousButton.addEventListener("click", () => {
     playSong(previousSong);
 })
 
+// next button
 nextButton.addEventListener("click", () =>{
     if (songs.length === 0) return;
 
@@ -63,12 +64,14 @@ nextButton.addEventListener("click", () =>{
     playSong(nextSong)
 })
 
+// progressbar
 progress.addEventListener("input", () => {
     if (audio.duration) {
         audio.currentTime = (progress.value / 100) * audio.duration;
     }
 });
 
+// volume bar
 volume.addEventListener("input", () => {
     audio.volume =  Number(volume.value);
 
