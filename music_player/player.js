@@ -4,6 +4,8 @@ const playButton = document.querySelector("#play");
 const progress = document.querySelector("#progress");
 const volume = document.querySelector("#volume");
 const songTitle = document.querySelector("#song-title");
+const previousButton = document.querySelector("#previous");
+const nextButton = document.querySelector("#next")
 
 let songs = [];
 let currentSong = 0;
@@ -36,6 +38,31 @@ playButton.addEventListener("click", () => {
         playButton.innerHTML = '<img src="static/images/play.svg" alt="Play">';
     }
 });
+
+// Previous song
+previousButton.addEventListener("click", () => {
+    if (songs.length === 0) return;
+
+    let previousSong = currentSong -1;
+
+    if (previousSong < 0) {
+        previousSong = songs.length - 1;
+    }
+
+    playSong(previousSong);
+})
+
+nextButton.addEventListener("click", () =>{
+    if (songs.length === 0) return;
+
+    let nextSong = currentSong + 1;
+
+    if(nextSong >= songs.length) {
+        nextSong = 0;
+    }
+    playSong(nextSong)
+})
+
 progress.addEventListener("input", () => {
     if (audio.duration) {
         audio.currentTime = (progress.value / 100) * audio.duration;
