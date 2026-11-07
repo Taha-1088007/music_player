@@ -1,23 +1,29 @@
 const audio= document.querySelector("#audio-player");
-const filePicker = document.querySelector("#file-picker");
+const chooseFolderButton = document.querySelector("#choose-folder");
 const playButton = document.querySelector("#play");
 const progress = document.querySelector("#progress");
 const volume = document.querySelector("#volume");
 const songTitle = document.querySelector("#song-title");
 
-// Choose mp3 file
-filePicker.addEventListener("change", () =>
-{
-    const file = filePicker.files[0];
+let songs = [];
+let currentSong = 0;
 
-    if (!file) return;
+// Choose music folder
+chooseFolderButton.addEventListener("click", async () => {
+    const folder = await window.musicAPI.chooseFolder();
 
-    audio.src = URL.createObjectURL(file);
-    songTitle.textContent = file.name;
+    if (!folder)return;
 
-    audio.play();
-    playButton.innerHTML = '<img src="static/images/pause.svg" alt="Pause">';
-});
+    songs = await window.musicAPI.getFiles();
+    currentSong = 0;
+
+    if (songs.length > 0){
+        playSong(currentSong);
+    }else{
+        songTitle.textContent = "Geen Mp3 bestanden gevonden"
+    }
+})
+
 // play and pause
 playButton.addEventListener("click", () => {
     if (!audio.src) return;
@@ -40,3 +46,15 @@ volume.addEventListener("input", () => {
     audio.volume =  Number(volume.value);
 
 });
+
+function playSong(index) {
+    if (songs.length === 0) return;
+
+    currentSong = index;
+    audio.src = songs[currentSong].url;
+    songTitle.textContent = songs[currentSong].name;
+
+    audio.play();
+    playButton.innerHTML = '<img src="static/images/pause.svg" alt ="Pause">';
+
+}
