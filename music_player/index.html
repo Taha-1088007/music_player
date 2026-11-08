@@ -32,8 +32,13 @@
             </button>
         </div>
 
-        <input id="progress" type="range"
-               min="0" max="100" value="0">
+        <div class="progress-container">
+            <span id="current">0.00</span>
+
+            <input id="progress" type="range" min="0" max="100" value="0">
+            <span id="duration">0.00</span>
+
+        </div>
 
         <label for="volume">Volume</label>
         <input id="volume" type="range"

@@ -6,6 +6,8 @@ const volume = document.querySelector("#volume");
 const songTitle = document.querySelector("#song-title");
 const previousButton = document.querySelector("#previous");
 const nextButton = document.querySelector("#next")
+const current = document.querySelector("#current");
+const duration = document.querySelector("#duration")
 
 let songs = [];
 let currentSong = 0;
@@ -67,9 +69,26 @@ nextButton.addEventListener("click", () =>{
 // progressbar
 progress.addEventListener("input", () => {
     if (audio.duration) {
-        audio.currentTime = (progress.value / 100) * audio.duration;
+        audio.currentTime= (progress.value / 100) * audio.duration;
     }
 });
+
+// update the progressbar and the current time
+audio.addEventListener("timeupdate", () => {
+    if (audio.duration) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+
+        current.textContent = `${Math.floor(audio.currentTime / 60)}:
+        ${String(Math.floor(audio.currentTime % 60)).padStart(2, "0")}`;
+    }
+});
+
+audio.addEventListener("loadedmetadata", () => {
+    duration.textContent = `${Math.floor(audio.duration /60)}: 
+    ${String(Math.floor(audio.duration % 60)).padStart(2,"0")}`;
+
+});
+
 
 // volume bar
 volume.addEventListener("input", () => {
