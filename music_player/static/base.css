@@ -49,3 +49,20 @@ body{
     color: #FFFFFF;
 }
 
+#choose-folder{
+    width: 100%;
+    min-height: 2.5rem;
+    margin-bottom: 2rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#choose-folder:hover{
+    background: #d9d9d9;
+}
