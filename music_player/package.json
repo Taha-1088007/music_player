@@ -1,7 +1,7 @@
 {
   "name": "music_player",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mp3-player",
   "main": "main.js",
   "scripts": {
     "dev": "electron ."
