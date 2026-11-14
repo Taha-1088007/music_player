@@ -22,6 +22,7 @@ chooseFolderButton.addEventListener("click", async () => {
     currentSong = 0;
 
     if (songs.length > 0){
+        chooseFolderButton.hidden = true;
         playSong(currentSong);
     }else{
         songTitle.textContent = "Geen Mp3 bestanden gevonden"
@@ -101,7 +102,7 @@ function playSong(index) {
 
     currentSong = index;
     audio.src = songs[currentSong].url;
-    songTitle.textContent = songs[currentSong].name;
+    songTitle.textContent = songs[currentSong].name.replace(/\.mp3$/i, "");
 
     audio.play();
     playButton.innerHTML = '<img src="static/images/pause.svg" alt ="Pause">';
